@@ -1,4 +1,0 @@
-ipPresa = 192.168.1.xxx
-emailAccountTapo = xxx@gmail.com
-passwordAccountTapo = xxxx
-urlModem = http://192.168.1.1/jrd/webapi?api=GetSystemStatus

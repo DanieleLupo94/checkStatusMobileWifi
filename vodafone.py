@@ -1,6 +1,5 @@
 from tplink_smartplug import SmartPlug
-import xml.etree.ElementTree as ET
-import requests as req
+import urequests2 as req
 
 configurazione = {}
 fileConfig = open("./configVodafone", "r")
@@ -23,9 +22,11 @@ def getPresaTapo():
         plug = SmartPlug(configurazione["ipPresa"])
         plug.name
         return plug, None
-    except:
+    except Exception as e:
+        print(e)
         plug = bruteSearchPresa()
-        return bruteSearchPresa(), None
+        return plug, None
+    print("Errore nella ricerca della presa.")
     return None, None
 
 def accendiPresa(presa):
@@ -42,9 +43,8 @@ def getInformazioniModem():
     r = req.get(configurazione['urlAPI'], headers = {'Cookie': setCookie})
     # Il contenuto della risposta ha bisogno di essere decodificato in UTF-8
     contenuto = r.content.decode('utf-8')
-    root_node = ET.fromstring(contenuto)
-    livelloBatteria = root_node.find('BatteryLevel').text
-    inCarica = root_node.find('BatteryStatus').text
+    livelloBatteria = contenuto[contenuto.find("<BatteryLevel>") + 14 : contenuto.find("</BatteryLevel>")]
+    inCarica = contenuto[contenuto.find("<BatteryStatus>") + 15 : contenuto.find("</BatteryStatus>")]
     return {
         "batteria" : int(livelloBatteria),
         "stato" : str(inCarica)
