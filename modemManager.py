@@ -1,12 +1,15 @@
 import vodafone as modem
 import time
 import iftttManager as im
+import logManager as lm
+
+canLoop = True
 
 def customLog(testo = ""):
     # Aggiungo data e ora
     now = time.localtime()
-    testo = str(now[0:5]) + " - " + testo
-    print(testo)
+    testo = str(now[0]) + "\\" + str(now[1]) + "\\" + str(now[2]) + " " + str(now[3]) + ":" + str(now[4]) + ":" + str(now[5]) + " - " + testo
+    lm.scriviLog(testo)
     im.inviaNotifica(testo = testo)
 
 def check():
@@ -21,7 +24,7 @@ def check():
         customLog("Impossibile contattare la presa.")
         return None
     isInCarica = modem.isInCarica(informazioniModem, presa)
-    customLog("batteria " + str(batteria) + ", stato " + str(stato) + ", isInCarica " + str(isInCarica))
+    customLog("Batteria: " + str(batteria) + ", stato: " + str(stato) + ", isInCarica: " + str(isInCarica))
     if batteria < 21:
         # Se non sta caricando, dovrei caricare
         if not isInCarica:
@@ -33,11 +36,14 @@ def check():
             customLog("Presa spenta") if modem.spegniPresa(presa) else customLog("Errore nello spegnimento della presa")
 
 def loopCheck():
+    global canLoop
+    canLoop = True
     try:
-        # Controllo
-        check()
-        # Attendo 10 minuti
-        time.sleep(10 * 60)
-        loopCheck()
+        while canLoop:
+            # Controllo
+            check()
+            # Attendo 10 minuti
+            time.sleep(10 * 60)
     except Exception as e:
-        customLog(str(e))
+        canLoop = False
+        customLog("Termino l'esecuzione per via del seguente errore: " + str(e))
