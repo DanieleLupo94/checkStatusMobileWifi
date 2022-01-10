@@ -42,8 +42,8 @@ def loopCheck():
         while canLoop:
             # Controllo
             check()
-            # Attendo 10 minuti
-            time.sleep(10 * 60)
+            # Attendo 30 minuti
+            time.sleep(30 * 60)
     except Exception as e:
         canLoop = False
         customLog("Termino l'esecuzione per via del seguente errore: " + str(e))
