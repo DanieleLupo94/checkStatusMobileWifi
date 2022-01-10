@@ -7,7 +7,6 @@ def connettiWifiVodafone():
     if not wifi.isconnected():
         retry = 10
         wifi.connect("Rete", "Password") # Provo a collegarmi al wifi
-        wifi.connect("VodafoneMobileWiFi-215297", "0874635237") # Provo a collegarmi al wifi
         while not wifi.isconnected():
             time.sleep(1)
             retry = retry - 1
