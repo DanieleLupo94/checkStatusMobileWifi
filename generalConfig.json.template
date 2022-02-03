@@ -1,6 +1,6 @@
 {
-    "logfile" : "False",
-    "logIFTTT" : "True",
+    "logfile" : false,
+    "logIFTTT" : true,
     "wifiSSID" : "Nome rete wifi",
     "wifiPassword" : "Password rete wifi",
     "urlDate" : "endpoint da cui ricevere la data (eg. 20220203)",

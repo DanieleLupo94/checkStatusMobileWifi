@@ -15,7 +15,7 @@ def sendLog(riga):
     
 def scriviLog(riga):
     mustWrite = conf["logfile"]
-    if mustWrite == "True":
+    if mustWrite:
         file = open(nomeFile, "a+")
         file.write(riga)
         file.write("\n")
