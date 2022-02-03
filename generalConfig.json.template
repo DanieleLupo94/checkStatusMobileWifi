@@ -1,0 +1,13 @@
+{
+    "logfile" : "False",
+    "logIFTTT" : "True",
+    "wifiSSID" : "Nome rete wifi",
+    "wifiPassword" : "Password rete wifi",
+    "urlDate" : "endpoint da cui ricevere la data (eg. 20220203)",
+    "urlLog" : "endpoint che serve a scrivere il log sul server",
+    "baseIp" : "192.168.0.",
+    "ipPresa" : "192.168.0.100",
+    "urlModem" : "http://192.168.0.1/html/launch.htm",
+    "urlAPI" : "http://192.168.0.1/api/monitoring/status",
+    "hookIFTTT" : "url per ricevere le notifiche via IFTTT"
+}
