@@ -1,17 +1,23 @@
 import time
+import urequests2 as req
+import utils
 
-def getNomeFile():
-    now = time.localtime()
-    return "log" + str(now[0]) + str(now[1]) + str(now[2])
+conf = utils.loadConfigurations()
 
-def getDataOra():
-    now = time.localtime()
-    return str(now[0]) + "\\" + str(now[1]) + "\\" + str(now[2]) + " " + str(now[3]) + ":" + str(now[4]) + ":" + str(now[5])
+response = req.get(conf["urlDate"])
+if response.status_code == 200:
+    nomeFile = "log" + response.content.decode('utf-8')
+else:
+    nomeFile = "log00000000"
+
+def sendLog(riga):
+    req.post(conf["urlLog"], json = {"riga" : riga})
     
 def scriviLog(riga):
-    nomeFile = getNomeFile()
-    file = open(nomeFile, "a+")
-    riga = "[" + getDataOra() + "] " + riga
-    file.write(riga)
-    file.write("\n")
-    file.close()
+    mustWrite = bool(conf["logfile"])
+    if mustWrite:
+        file = open(nomeFile, "a+")
+        file.write(riga)
+        file.write("\n")
+        file.close()
+    sendLog(riga)

@@ -1,12 +1,15 @@
 import network
 import time
+import utils
+
+conf = utils.loadConfigurations()
 
 def connettiWifiVodafone():
     wifi = network.WLAN(network.STA_IF)
     wifi.active(True)
     if not wifi.isconnected():
         retry = 10
-        wifi.connect("Rete", "Password") # Provo a collegarmi al wifi
+        wifi.connect(conf["wifiSSID"], conf["wifiPassword"]) # Provo a collegarmi al wifi
         while not wifi.isconnected():
             time.sleep(1)
             retry = retry - 1

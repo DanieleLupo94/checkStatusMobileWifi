@@ -2,15 +2,12 @@
 #import esp
 #esp.osdebug(None)
 import wifiManager as myWifiManager
-import logManager as lm
 import network
 #import webrepl
 
 connesso = myWifiManager.connettiWifiVodafone()
 if connesso:
-    # Recupero data e ora dal server ntp
-    import ntptime
-    ntptime.settime()
+    import logManager as lm
     lm.scriviLog("Connesso al wifi.")
     #webrepl.start()
     import modemManager as mm
@@ -28,7 +25,7 @@ if connesso:
 
     im.inviaNotifica(testo = "ESP32 avviato")
     avviaThreadLoopCheck()
-    avviaFTP()
+    #avviaFTP()
     
 else:
-    lm.scriviLog("Impossibile connettersi.")
+    print("Impossibile connettersi.")

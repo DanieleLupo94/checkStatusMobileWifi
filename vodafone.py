@@ -1,10 +1,8 @@
 from tplink_smartplug import SmartPlug
 import urequests2 as req
+import utils
 
-configurazione = {}
-fileConfig = open("./configVodafone", "r")
-for line in fileConfig.read().splitlines():
-        configurazione[line.split(' = ')[0]] = str(line.split(' = ')[1])
+configurazione = utils.loadConfigurations()
 
 def bruteSearchPresa():
     baseIp = configurazione['baseIp']

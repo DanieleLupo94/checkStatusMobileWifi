@@ -6,9 +6,6 @@ import logManager as lm
 canLoop = True
 
 def customLog(testo = ""):
-    # Aggiungo data e ora
-    now = time.localtime()
-    testo = str(now[0]) + "\\" + str(now[1]) + "\\" + str(now[2]) + " " + str(now[3]) + ":" + str(now[4]) + ":" + str(now[5]) + " - " + testo
     lm.scriviLog(testo)
     im.inviaNotifica(testo = testo)
 

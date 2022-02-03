@@ -1,7 +1,11 @@
 import urequests2 as req
 import logManager as lm
+import utils
 
-def inviaNotifica(url = "hook ifttt", testo = ""):
-    req.post(url, json={'value1': testo})
-    lm.scriviLog("IFTTT >> " + testo)
+conf = utils.loadConfigurations()
+
+def inviaNotifica(url = conf["hookIFTTT"], testo = ""):
+    mustNotify = bool(conf["logIFTTT"])
+    if mustNotify:
+        req.post(url, json={'value1': testo})
     
