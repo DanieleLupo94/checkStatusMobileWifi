@@ -5,7 +5,6 @@ import utils
 conf = utils.loadConfigurations()
 
 def inviaNotifica(url = conf["hookIFTTT"], testo = ""):
-    mustNotify = bool(conf["logIFTTT"])
-    if mustNotify:
+    mustNotify = conf["logIFTTT"]
+    if mustNotify == "True":
         req.post(url, json={'value1': testo})
-    

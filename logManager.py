@@ -14,8 +14,8 @@ def sendLog(riga):
     req.post(conf["urlLog"], json = {"riga" : riga})
     
 def scriviLog(riga):
-    mustWrite = bool(conf["logfile"])
-    if mustWrite:
+    mustWrite = conf["logfile"]
+    if mustWrite == "True":
         file = open(nomeFile, "a+")
         file.write(riga)
         file.write("\n")
