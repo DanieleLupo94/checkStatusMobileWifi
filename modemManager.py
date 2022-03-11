@@ -35,12 +35,12 @@ def check():
 def loopCheck():
     global canLoop
     canLoop = True
-    try:
-        while canLoop:
+    while canLoop:
+        try:
             # Controllo
             check()
             # Attendo 30 minuti
             time.sleep(30 * 60)
-    except Exception as e:
-        canLoop = False
-        customLog("Termino l'esecuzione per via del seguente errore: " + str(e))
+        except Exception as e:
+            customLog("Problemi durante l'esecuzione. Ci riprovo fa 5 minuti")
+            time.sleep(5 * 60)
